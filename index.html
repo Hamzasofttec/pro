@@ -105,17 +105,44 @@
 
 
 <script>
-  const buttons = document.querySelectorAll('.option-btn');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.disabled = true); // disable all
-      if (btn.textContent === 'Robert Kirkman') {
-        btn.classList.add('correct');
-      } else {
-        btn.classList.add('wrong');
-      }
+  // Array of correct answers in order (Q1 to Q4)
+  const correctAnswers = [
+    "Hamza",              // Q1
+    "Robert Kirkman",     // Q2
+    "Kirkman",            // Q3
+    "Robert"              // Q4
+  ];
+
+  // Get all .options blocks (each question's choices)
+  const questions = document.querySelectorAll(".options");
+
+  // Loop through each question
+  questions.forEach((optionsDiv, questionIndex) => {
+    const optionButtons = optionsDiv.querySelectorAll(".option-btn");
+
+    optionButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        // Disable all options in current question
+        optionButtons.forEach(btn => btn.disabled = true);
+
+        const selectedAnswer = button.textContent.trim();
+        const correctAnswer = correctAnswers[questionIndex];
+
+        if (selectedAnswer === correctAnswer) {
+          button.classList.add("correct");
+        } else {
+          button.classList.add("wrong");
+          // Highlight correct answer
+          optionButtons.forEach(btn => {
+            if (btn.textContent.trim() === correctAnswer) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      });
     });
   });
 </script>
+
 
 </html>
