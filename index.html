@@ -102,4 +102,20 @@
     </div>
   </div>
 </body>
+
+
+<script>
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.disabled = true); // disable all
+      if (btn.textContent === 'Robert Kirkman') {
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('wrong');
+      }
+    });
+  });
+</script>
+
 </html>
